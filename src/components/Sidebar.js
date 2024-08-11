@@ -7,7 +7,7 @@ const SidebarContainer = styled.div`
   background-color: ${(props) => props.theme.colors.secondary};
 
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    width: 25%;
+    width: 100%;
   }
 `;
 
