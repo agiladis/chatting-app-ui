@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle, theme } from './styles';
+import ChatPage from './pages/ChatPage';
 
-function App() {
+const App = () => {
+  const users = [
+    { id: 1, name: 'Ridwan', online: true },
+    { id: 2, name: 'Agent', online: false },
+  ];
+
+  const chats = [{ id: 1, name: 'Group Bakalan-Bakalan' }];
+
+  const messages = [
+    { id: 1, content: 'Hello, how can I help you?', isSender: true },
+    { id: 2, content: 'I need assistance with my account.', isSender: false },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <ChatPage users={users} chats={chats} messages={messages} />
+          </Route>
+        </Switch>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
