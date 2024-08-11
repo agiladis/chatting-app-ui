@@ -11,13 +11,14 @@ const StatusDot = styled.div`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: ${(props) => (props.online ? 'green' : 'red')};
+  background-color: ${(props) => (props.user.role === 0 ? 'green' : 'red')};
   margin-right: 10px;
 `;
 
 const UserStatus = ({ user }) => (
   <UserContainer>
-    <StatusDot online={user.online} />
+    <p>check</p>
+    <StatusDot user={user} />
     <span>{user.name}</span>
   </UserContainer>
 );
