@@ -1,31 +1,42 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './styles';
 import ChatPage from './pages/ChatPage';
+import { chatResponse } from './data/chatResponse';
 
 const App = () => {
-  const users = [
-    { id: 1, name: 'Ridwan', online: true },
-    { id: 2, name: 'Agent', online: false },
-  ];
+  const { rooms } = chatResponse.results;
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
-  const chats = [{ id: 1, name: 'Group Bakalan-Bakalan' }];
+  const handleRoomSelect = (room) => {
+    setSelectedRoom(room);
+    setIsSidebarVisible(false); // Hide sidebar on mobile when a room is selected
+  };
 
-  const messages = [
-    { id: 1, content: 'Hello, how can I help you?', isSender: true },
-    { id: 2, content: 'I need assistance with my account.', isSender: false },
-  ];
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Router>
-        <Switch>
-          <Route path="/" exact>
-            <ChatPage users={users} chats={chats} messages={messages} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ChatPage
+                rooms={rooms}
+                selectedRoom={selectedRoom}
+                onRoomSelect={handleRoomSelect}
+                isSidebarVisible={isSidebarVisible}
+                toggleSidebar={toggleSidebar}
+              />
+            }
+          />
+        </Routes>
       </Router>
     </ThemeProvider>
   );

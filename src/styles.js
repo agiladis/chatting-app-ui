@@ -12,4 +12,10 @@ export const theme = {
     primary: '#4CAF50',
     secondary: '#f1f1f1',
   },
+  breakpoints: {
+    mobile: '480px',
+    tablet: '768px',
+    laptop: '1024px',
+    desktop: '1200px',
+  },
 };
